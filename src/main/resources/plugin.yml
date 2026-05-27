@@ -1,0 +1,4 @@
+name: PlayerGov
+version: '1.0-SNAPSHOT'
+main: org.github.officialbiscuityt.playerGov.PlayerGov
+api-version: '1.21'
