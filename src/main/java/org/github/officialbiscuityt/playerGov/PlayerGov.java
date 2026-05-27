@@ -14,6 +14,11 @@ public final class PlayerGov extends JavaPlugin
     public void onEnable() {
         // Plugin startup logic
 
+            saveResource("config.yml", /* replace */ false);
+
+            // You can also use this for configuration files:
+            saveDefaultConfig();
+            // Where the default config.yml will be saved if it does not already exist
     }
 
     @Override
