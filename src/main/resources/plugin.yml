@@ -1,6 +1,6 @@
 name: PlayerGov
 version: 1.0.0
-main: io.papermc.testplugin.ExamplePlugin
+main: org.github.officialbiscuityt.playergov.PlayerGov
 description: A powerful government RP/Nations Plugin :)
 author: BiscuitPlays
 website: https://github.com/officialbiscuityt-cloud/PlayerGov
