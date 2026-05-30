@@ -2,3 +2,9 @@ name: PlayerGov
 version: '1.0-SNAPSHOT'
 main: org.github.officialbiscuityt.playerGov.PlayerGov
 api-version: '1.21'
+
+commands:
+  reload:
+    description: Reload
+    permission: playergov.reload
+    usage: /playergov [reload]

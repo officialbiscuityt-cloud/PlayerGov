@@ -19,6 +19,7 @@ public final class PlayerGov extends JavaPlugin
             // You can also use this for configuration files:
             saveDefaultConfig();
             // Where the default config.yml will be saved if it does not already exist
+
     }
 
     @Override
