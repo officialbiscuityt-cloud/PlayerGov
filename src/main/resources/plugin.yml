@@ -1,13 +1,15 @@
 name: PlayerGov
 version: 1.0.0
-main: org.github.officialbiscuityt.playergov.PlayerGov
+main: org.github.officialbiscuityt.playerGov.PlayerGov
 description: A powerful government RP/Nations Plugin :)
 author: BiscuitPlays
 website: https://github.com/officialbiscuityt-cloud/PlayerGov
-api-version: '26.1.2'
+api-version: '1.21'
 
 commands:
   reload:
-    description: Reload
+    description: "Reload PlayerGov Config.yml file :p"
+    usage: "/playergov reload"
+    aliases: [playgov, plgov]
     permission: playergov.reload
-    usage: /playergov [reload]
+    permission-message: "You do not have permission to use this command"

@@ -14,7 +14,19 @@ public final class PlayerGov extends JavaPlugin
     public void onEnable() {
         // Plugin startup logic
 
+        // Print PlayerGov to console
+        getLogger().info("""
+
+██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗  ██████╗  ██████╗ ██╗   ██╗
+██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗██╔════╝ ██╔═══██╗██║   ██║
+██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝██║  ███╗██║   ██║██║   ██║
+██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗██║   ██║██║   ██║╚██╗ ██╔╝
+██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║╚██████╔╝╚██████╔╝ ╚████╔╝
+╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═══╝
+""");
+
             saveResource("config.yml", /* replace */ false);
+
 
             // You can also use this for configuration files:
             saveDefaultConfig();
@@ -25,5 +37,8 @@ public final class PlayerGov extends JavaPlugin
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    public void loadConfigurationValues() {
     }
 }
