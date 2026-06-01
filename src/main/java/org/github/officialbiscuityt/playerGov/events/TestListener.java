@@ -1,4 +1,4 @@
-package org.github.officialbiscuityt.playerGov;
+package org.github.officialbiscuityt.playerGov.events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 
 public class TestListener implements Listener {
 

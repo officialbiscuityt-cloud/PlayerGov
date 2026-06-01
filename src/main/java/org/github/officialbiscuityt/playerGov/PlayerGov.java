@@ -4,6 +4,7 @@ package org.github.officialbiscuityt.playerGov;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.github.officialbiscuityt.playerGov.commands.playergov.reload;
+import org.github.officialbiscuityt.playerGov.events.TestListener;
 
 // Clase defines
 public class PlayerGov extends JavaPlugin{
