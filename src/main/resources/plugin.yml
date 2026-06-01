@@ -7,9 +7,17 @@ website: https://github.com/officialbiscuityt-cloud/PlayerGov
 api-version: '1.21'
 
 commands:
-  reload:
-    description: "Reload PlayerGov Config.yml file :p"
-    usage: "/playergov reload"
-    aliases: [playgov, plgov]
-    permission: playergov.reload
-    permission-message: "You do not have permission to use this command"
+  playergov:
+    description: Main PlayerGov command
+    usage: /playergov <subcommand>
+    aliases: [pg, plgov]
+
+  playergovreload:
+    description: Reload
+    usage: /playergov reload
+    aliases: []
+
+permissions:
+  playergov.reload:
+    description: Allows reloading the PlayerGov configuration
+    default: op

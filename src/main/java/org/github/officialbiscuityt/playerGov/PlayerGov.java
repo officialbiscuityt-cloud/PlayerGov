@@ -1,43 +1,28 @@
 package org.github.officialbiscuityt.playerGov;
 
-import net.kyori.adventure.text.Component;
+// Imports
 import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.github.officialbiscuityt.playerGov.commands.playergov.reload;
 
-public final class PlayerGov extends JavaPlugin
-{
+// Clase defines
+public class PlayerGov extends JavaPlugin{
+private static PlayerGov instance;
+
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        instance = this;
+        // Prints PlayerGov Welcoming Statement
+        getLogger().info("Enjoy PlayerGov! :)");
 
-        // Print PlayerGov to console
-        getLogger().info("""
-
-██████╗ ██╗      █████╗ ██╗   ██╗███████╗██████╗  ██████╗  ██████╗ ██╗   ██╗
-██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝██╔══██╗██╔════╝ ██╔═══██╗██║   ██║
-██████╔╝██║     ███████║ ╚████╔╝ █████╗  ██████╔╝██║  ███╗██║   ██║██║   ██║
-██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██╔══╝  ██╔══██╗██║   ██║██║   ██║╚██╗ ██╔╝
-██║     ███████╗██║  ██║   ██║   ███████╗██║  ██║╚██████╔╝╚██████╔╝ ╚████╔╝
-╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝   ╚═══╝
-""");
-
-            saveResource("config.yml", /* replace */ false);
-
-
-            // You can also use this for configuration files:
-            saveDefaultConfig();
-            // Where the default config.yml will be saved if it does not already exist
-
+        Bukkit.getPluginManager().registerEvents(new TestListener(), this);
     }
 
     @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
+    public void onDisable() { System.out.println("Shutting Down... :p");}
+
+    public static PlayerGov getinstance() {return instance;}
 
     public void loadConfigurationValues() {
     }
