@@ -1,7 +1,14 @@
 ## ===============================
 ## PLAYERGOV
-## VER: 1.0
-## API: 1.21
+## VER: 0.01
+## Paper API: 1.21
 ## TESTED_VERSIONS: 1.21
 ## By: BiscuitPlays
 ## ===============================
+
+# Enable/Disable Essentials Economy Features [FUTURE RELEASE]
+economyEnabled: true
+
+# Block Nation Names (Not Case Sensitive)
+blockedNationNames:
+  - TestName1

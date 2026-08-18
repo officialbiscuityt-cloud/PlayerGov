@@ -1,5 +1,5 @@
 name: PlayerGov
-version: 1.0.0
+version: 0.01
 main: org.github.officialbiscuityt.playerGov.PlayerGov
 description: A powerful government RP/Nations Plugin :)
 author: BiscuitPlays
@@ -10,14 +10,18 @@ commands:
   playergov:
     description: Main PlayerGov command
     usage: /playergov <subcommand>
-    aliases: [pg, plgov]
+    aliases: [pg, gov, nation, n]
+  test-createnation:
+    permission: op
+  test-reload:
+    permission: playergov.reload
 
-  playergovreload:
-    description: Reload
-    usage: /playergov reload
-    aliases: []
 
 permissions:
+  playergov.*:
+    description: Admin permission for PlayerGov
   playergov.reload:
-    description: Allows reloading the PlayerGov configuration
+    descripton: Allows reloading the PlayerGov configuration
     default: op
+    parent: playergov.*
+  playergov.ncreate:
