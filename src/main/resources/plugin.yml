@@ -11,10 +11,6 @@ commands:
     description: Main PlayerGov command
     usage: /playergov <subcommand>
     aliases: [pg, gov, nation, n]
-  test-createnation:
-    permission: op
-  test-reload:
-    permission: playergov.reload
 
 
 permissions:
@@ -25,3 +21,18 @@ permissions:
     default: op
     parent: playergov.*
   playergov.ncreate:
+    description: Permission for creating a nation
+    default: op
+    parent: playergov.*
+  playergov.ndisband:
+    default: op
+    parent: playergov.*
+  playergov.ndisband.other:
+    default: op
+    parent: playergov.*
+  playergov.info:
+    default: op
+    parent: playergov.*
+  playergov.info.other:
+    default: op
+    parent: playergov.*

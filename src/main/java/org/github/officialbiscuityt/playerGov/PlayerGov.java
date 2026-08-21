@@ -1,42 +1,38 @@
 package org.github.officialbiscuityt.playerGov;
 
-// Imports
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.github.officialbiscuityt.playerGov.Managers.NationDataManager;
-import org.github.officialbiscuityt.playerGov.commands.NationCreateCommand;
-import org.github.officialbiscuityt.playerGov.commands.ReloadCommand;
-//import org.github.officialbiscuityt.playerGov.commands.playergov.reload;
+import org.github.officialbiscuityt.playerGov.commands.PlayerGovSubCommands.*;
 
+public class PlayerGov extends JavaPlugin {
 
-// Clase defines
-public class PlayerGov extends JavaPlugin{
-private static PlayerGov instance;
-private NationDataManager nationDataManager;
+    private NationDataManager nationDataManager;
 
     @Override
     public void onEnable() {
-        instance = this;
-        // Loads Managers
-        nationDataManager = new NationDataManager(this);
 
-        // Saves config File
+        // Save config
         saveDefaultConfig();
-        // Prints PlayerGov Welcoming Statement
+
+        // Load managers
+        nationDataManager = new NationDataManager(this);
+        CommandManager manager = new CommandManager();
+        manager.register(new NationCreateCommand(nationDataManager));
+        manager.register(new ReloadCommand(this));
+        manager.register(new NationDisbandCommand(nationDataManager));
+        manager.register(new NationInfoCommand(nationDataManager));
+
+        // Welcome message
         getLogger().info("Enjoy PlayerGov! :)");
 
-        // Registers Commands
-        this.getCommand("test-createnation").setExecutor(new NationCreateCommand(nationDataManager));
-        this.getCommand("test-reload").setExecutor(new ReloadCommand(this));
+        // Register commands
 
-        // Loads Other
+        getCommand("playergov").setExecutor(new PlayerGovCommand(manager));
+
+        getCommand("playergov").setTabCompleter(new PlayerGovTabCompleter());
     }
 
-
     @Override
-    public void onDisable() { getLogger().info("Shutting Down... :p");}
-
-
+    public void onDisable() {
+    }
 }
-
-

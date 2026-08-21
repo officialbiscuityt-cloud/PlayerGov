@@ -3,9 +3,11 @@ package org.github.officialbiscuityt.playerGov.Managers;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class NationDataManager {
 
@@ -33,11 +35,21 @@ public class NationDataManager {
         reload();
     }
 
-    public void createNation(String name, String owner) {
+    public void createNation(String name, String owner, String ownerUUID) {
 
         data.set("nations." + name + ".name", name);
         data.set("nations." + name + ".owner", owner);
+        data.set("nations." + name + ".ownerUUID", ownerUUID);
 
+        save();
+    }
+    public void deleteNation(String name) {
+        data.set("nations." + name, null);
+        save();
+    }
+    public void transferNation(String name, String newOwner, String newOwnerUUID) {
+        data.set("nations." + name + ".owner", newOwner);
+        data.set("nations." + name + ".ownerUUID", newOwnerUUID);
         save();
     }
 
@@ -49,9 +61,14 @@ public class NationDataManager {
         return data.getString("nations." + name + ".owner");
     }
 
+    public String getOwnerUUID(String name) {
+        return data.getString("nations." + name + ".ownerUUID");
+    }
+
     public boolean exists(String name) {
         return data.contains("nations." + name);
     }
+
 
     public void save() {
         try {
