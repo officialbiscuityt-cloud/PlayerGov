@@ -37,16 +37,19 @@ public class NationInfoCommand implements SubCommand {
             return;
         }
         // Checks if nation exists
-        String NDMnation = nationDataManager.getName(nationName);
-        if (!nationName.equalsIgnoreCase(NDMnation)) {
+        String NDMnationId = nationDataManager.getid(nationName);
+        String NDMnationName = nationDataManager.getName(nationName);
+        String argNationId = nationDataManager.getid(args[1]);
+
+        if (!argNationId.equalsIgnoreCase(NDMnationId)) {
             sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.RED + " That nation does not exist!");
             return;
         }
         // Defines variables
         if (sender instanceof Player player) {
            String playerUUID = player.getUniqueId().toString();
-           String ownerUUID = nationDataManager.getOwnerUUID(nationName);
-           String ownerName = nationDataManager.getOwner(nationName);
+           String ownerUUID = nationDataManager.getOwnerUUID(NDMnationId);
+           String ownerName = nationDataManager.getOwner(NDMnationId);
 
            // Sends info if you are owner or admin
            if (playerUUID.equals(ownerUUID) || sender.hasPermission("playergov.info.other")) {

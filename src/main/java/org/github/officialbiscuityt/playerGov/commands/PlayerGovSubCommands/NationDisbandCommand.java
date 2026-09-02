@@ -36,6 +36,7 @@ public class NationDisbandCommand implements SubCommand{
             sender.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
             return;
         }
+        String NDMID = nationDataManager.getid(nationName);
         // Ensures nation name isn't null
         if (nationName == null) {
             sender.sendMessage(ChatColor.RED + "Nation name cannot be null.");
@@ -44,15 +45,15 @@ public class NationDisbandCommand implements SubCommand{
         boolean IsConsole = !(sender instanceof Player player);
         boolean IsAdmin = (sender.hasPermission("playergov.nations.*"));
         boolean IsOwner = false;
-        String NDMNationName = nationDataManager.getName(nationName);
+        String NDMNationName = nationDataManager.getName(NDMID);
         // Checks if the sender is a player
         if (sender instanceof Player player) {
 
-            String ownerUUID = nationDataManager.getOwnerUUID(nationName);
+            String ownerUUID = nationDataManager.getOwnerUUID(NDMID);
             IsOwner = player.getUniqueId().toString().equals(ownerUUID);
         }
         // Checks if nation exists
-        if (!nationDataManager.exists(nationName)) {
+        if (!nationDataManager.exists(NDMID)) {
             sender.sendMessage(
                     ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "] " + ChatColor.RED + "Nation " + ChatColor.YELLOW + nationName + ChatColor.RED + " does not exist!"
             );
@@ -60,7 +61,7 @@ public class NationDisbandCommand implements SubCommand{
         }
         // Disbands nation
         if (IsOwner || IsConsole || IsAdmin) {
-            nationDataManager.deleteNation(nationName);
+            nationDataManager.deleteNation(NDMID);
             sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "] " + ChatColor.RED + "Nation " + ChatColor.YELLOW + nationName + ChatColor.RED + " has been disbanded!");
         }
         }

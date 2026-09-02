@@ -3,11 +3,9 @@ package org.github.officialbiscuityt.playerGov.Managers;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 public class NationDataManager {
 
@@ -35,40 +33,57 @@ public class NationDataManager {
         reload();
     }
 
-    public void createNation(String name, String owner, String ownerUUID) {
 
-        data.set("nations." + name + ".name", name);
-        data.set("nations." + name + ".owner", owner);
-        data.set("nations." + name + ".ownerUUID", ownerUUID);
+    public void createNation(String id, String name, String owner, String ownerUUID) {
+
+        data.set("nations." + id + ".id", id);
+        data.set("nations." + id + ".name", name);
+        data.set("nations." + id + ".owner", owner);
+        data.set("nations." + id + ".ownerUUID", ownerUUID);
 
         save();
     }
-    public void deleteNation(String name) {
-        data.set("nations." + name, null);
+    public void deleteNation(String id) {
+        data.set("nations." + id, null);
         save();
     }
-    public void transferNation(String name, String newOwner, String newOwnerUUID) {
-        data.set("nations." + name + ".owner", newOwner);
-        data.set("nations." + name + ".ownerUUID", newOwnerUUID);
+    public void transferNation(String id, String newOwner, String newOwnerUUID) {
+        data.set("nations." + id + ".owner", newOwner);
+        data.set("nations." + id + ".ownerUUID", newOwnerUUID);
         save();
     }
 
-    public String getName(String name) {
-        return data.getString("nations." + name + ".name");
+    public String getid(String name) {
+        if (data.getConfigurationSection("nations") == null) {
+            return null;
+        }
+        for (String id : data.getConfigurationSection("nations").getKeys(false)) {
+
+            String nationName = data.getString("nations." + id + ".name");
+
+            if (nationName != null && nationName.equalsIgnoreCase(name)) {
+                return id;
+            }
+        }
+
+        return null;
     }
 
-    public String getOwner(String name) {
-        return data.getString("nations." + name + ".owner");
+    public String getName(String id) {
+        return data.getString("nations." + id + ".name");
     }
 
-    public String getOwnerUUID(String name) {
-        return data.getString("nations." + name + ".ownerUUID");
+    public String getOwner(String id) {
+        return data.getString("nations." + id + ".owner");
     }
 
-    public boolean exists(String name) {
-        return data.contains("nations." + name);
+    public String getOwnerUUID(String id) {
+        return data.getString("nations." + id + ".ownerUUID");
     }
 
+    public boolean exists(String id) {
+        return data.contains("nations." + id);
+    }
 
     public void save() {
         try {

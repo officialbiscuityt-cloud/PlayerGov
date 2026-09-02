@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.github.officialbiscuityt.playerGov.Managers.NationDataManager;
 
 import java.util.List;
+import java.util.UUID;
 
 public class NationCreateCommand implements SubCommand {
 
@@ -53,7 +54,8 @@ public class NationCreateCommand implements SubCommand {
             return;
         }
 // Checks if the nation already exists
-        if (nationDataManager.exists(nationName)) {
+        String NDMID = nationDataManager.getid(nationName);
+        if (nationDataManager.exists(NDMID)) {
             sender.sendMessage(
                     ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "] " + ChatColor.RED + "That nation already exists!"
             );
@@ -65,7 +67,9 @@ public class NationCreateCommand implements SubCommand {
             return;
         }
 // Created nation
+        String nationId = UUID.randomUUID().toString();
         nationDataManager.createNation(
+                nationId,
                 nationName,
                 player.getName(),
                 player.getUniqueId().toString()
