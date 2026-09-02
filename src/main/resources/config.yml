@@ -12,3 +12,5 @@ economyEnabled: true
 # Block Nation Names (Not Case Sensitive)
 blockedNationNames:
   - TestName1
+
+# Messages

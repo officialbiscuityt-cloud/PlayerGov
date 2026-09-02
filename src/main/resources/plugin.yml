@@ -36,3 +36,9 @@ permissions:
   playergov.info.other:
     default: op
     parent: playergov.*
+  playergov.transfer:
+    default: op
+    parent: playergov.*
+  playergov.transfer.other:
+    default: op
+    parent: playergov.*

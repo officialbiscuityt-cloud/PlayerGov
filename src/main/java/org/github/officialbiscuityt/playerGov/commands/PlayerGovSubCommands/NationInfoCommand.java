@@ -50,7 +50,7 @@ public class NationInfoCommand implements SubCommand {
 
            // Sends info if you are owner or admin
            if (playerUUID.equals(ownerUUID) || sender.hasPermission("playergov.info.other")) {
-               sender.sendMessage(ChatColor.DARK_GRAY + "========== " + ChatColor.GOLD + ChatColor.BOLD + "Nation Info for " + nationName + ChatColor.RESET + ChatColor.DARK_GRAY + " ========== ");
+               sender.sendMessage(ChatColor.DARK_GRAY + "========== " + ChatColor.GRAY + "Nation Info for " + ChatColor.GOLD + ChatColor.BOLD + nationName + ChatColor.RESET + ChatColor.DARK_GRAY + " ========== ");
                sender.sendMessage(ChatColor.GRAY + "Name: " + ChatColor.WHITE + nationName);
                sender.sendMessage(ChatColor.GRAY + "Owner: " + ChatColor.WHITE + ownerName);
            }

@@ -21,6 +21,7 @@ public class PlayerGov extends JavaPlugin {
         manager.register(new ReloadCommand(this));
         manager.register(new NationDisbandCommand(nationDataManager));
         manager.register(new NationInfoCommand(nationDataManager));
+        manager.register(new NationTransferCommand(nationDataManager));
 
         // Welcome message
         getLogger().info("Enjoy PlayerGov! :)");
