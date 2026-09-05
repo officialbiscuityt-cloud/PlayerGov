@@ -30,7 +30,7 @@ public class PlayerGov extends JavaPlugin {
 
         getCommand("playergov").setExecutor(new PlayerGovCommand(manager));
 
-        getCommand("playergov").setTabCompleter(new PlayerGovTabCompleter());
+        getCommand("playergov").setTabCompleter(new PlayerGovTabCompleter(nationDataManager));
     }
 
     @Override

@@ -41,22 +41,25 @@ public class NationInfoCommand implements SubCommand {
         String NDMnationName = nationDataManager.getName(nationName);
         String argNationId = nationDataManager.getid(args[1]);
 
-        if (!argNationId.equalsIgnoreCase(NDMnationId)) {
-            sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.RED + " That nation does not exist!");
-            return;
-        }
         // Defines variables
         if (sender instanceof Player player) {
            String playerUUID = player.getUniqueId().toString();
            String ownerUUID = nationDataManager.getOwnerUUID(NDMnationId);
            String ownerName = nationDataManager.getOwner(NDMnationId);
 
+            if (!playerUUID.equals(ownerUUID) && !sender.hasPermission("playergov.info.other")) {
+                return;
+            }
+            if (!nationDataManager.exists(NDMnationId)) {
+                sender.sendMessage(
+                        ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "] " + ChatColor.RED + "Nation " + ChatColor.YELLOW + nationName + ChatColor.RED + " does not exist!");
+                return;
+            }
+
            // Sends info if you are owner or admin
-           if (playerUUID.equals(ownerUUID) || sender.hasPermission("playergov.info.other")) {
-               sender.sendMessage(ChatColor.DARK_GRAY + "========== " + ChatColor.GRAY + "Nation Info for " + ChatColor.GOLD + ChatColor.BOLD + nationName + ChatColor.RESET + ChatColor.DARK_GRAY + " ========== ");
+               sender.sendMessage(ChatColor.DARK_GRAY + "======= " + ChatColor.GRAY + "Nation Info for " + ChatColor.GOLD + ChatColor.BOLD + nationName + ChatColor.RESET + ChatColor.DARK_GRAY + " ======= ");
                sender.sendMessage(ChatColor.GRAY + "Name: " + ChatColor.WHITE + nationName);
                sender.sendMessage(ChatColor.GRAY + "Owner: " + ChatColor.WHITE + ownerName);
-           }
         }
     }
 }

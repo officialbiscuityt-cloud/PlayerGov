@@ -40,7 +40,8 @@ public class NationTransferCommand implements SubCommand {
         }
         String transferNationName = args[1];
         String newPlayerName = args[2];
-        String NDMnation = nationDataManager.getName(transferNationName);
+        String NDMId = nationDataManager.getid(args[1]);
+        String NDMName = nationDataManager.getName(NDMId);
 
         Boolean isOwner = false;
 
@@ -50,7 +51,7 @@ public class NationTransferCommand implements SubCommand {
         String newPlayerUUID = newPlayer.getUniqueId().toString();
 
         if (sender instanceof Player player) {
-            String ownerUUID = nationDataManager.getOwnerUUID(transferNationName);
+            String ownerUUID = nationDataManager.getOwnerUUID(NDMId);
 
             isOwner = player.getUniqueId().toString().equals(ownerUUID);
         }
@@ -59,7 +60,7 @@ public class NationTransferCommand implements SubCommand {
     }
 
     // Checks if nation exists
-        if (!nationDataManager.exists(transferNationName)) {
+        if (!nationDataManager.exists(NDMId)) {
             sender.sendMessage(
                     ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.RED + " That nation does not exist!");
             return;
@@ -71,10 +72,10 @@ public class NationTransferCommand implements SubCommand {
         }
 
     nationDataManager.transferNation(
-            transferNationName,
+            NDMId,
             newPlayerName,
             newPlayerUUID
     );
-        sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Nation " + ChatColor.YELLOW + transferNationName + ChatColor.GREEN + " was transfered to " + ChatColor.YELLOW + newPlayerName + ChatColor.GREEN + "!");
+        sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Nation " + ChatColor.YELLOW + NDMName + ChatColor.GREEN + " was transfered to " + ChatColor.YELLOW + newPlayerName + ChatColor.GREEN + "!");
     }
 }

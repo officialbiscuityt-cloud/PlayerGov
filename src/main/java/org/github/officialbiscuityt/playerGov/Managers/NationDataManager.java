@@ -6,6 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NationDataManager {
 
@@ -34,10 +36,9 @@ public class NationDataManager {
     }
 
 
-    public void createNation(String id, String name, String owner, String ownerUUID) {
-
-        data.set("nations." + id + ".id", id);
+    public void createNation(String name, String id, String owner, String ownerUUID) {
         data.set("nations." + id + ".name", name);
+        data.set("nations." + id + ".id", id);
         data.set("nations." + id + ".owner", owner);
         data.set("nations." + id + ".ownerUUID", ownerUUID);
 
@@ -67,6 +68,25 @@ public class NationDataManager {
         }
 
         return null;
+    }
+
+    public List<String> getOwnedNations(String ownerUUID) {
+        List<String> ownedNations = new ArrayList<>();
+
+        if (data.getConfigurationSection("nations") == null) {
+            return ownedNations;
+        }
+        for (String id : data.getConfigurationSection("nations").getKeys(false)) {
+            String savedOwnerUUID = data.getString("nations." + id + ".ownerUUID");
+            if (ownerUUID.equals(savedOwnerUUID)) {
+                String nationName = data.getString("nations." + id + ".name");
+                if (nationName != null) {
+                    ownedNations.add(nationName);
+                }
+            }
+        }
+
+        return ownedNations;
     }
 
     public String getName(String id) {

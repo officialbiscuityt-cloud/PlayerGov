@@ -69,8 +69,7 @@ public class NationCreateCommand implements SubCommand {
 // Created nation
         String nationId = UUID.randomUUID().toString();
         nationDataManager.createNation(
-                nationId,
-                nationName,
+                nationName, nationId,
                 player.getName(),
                 player.getUniqueId().toString()
         );

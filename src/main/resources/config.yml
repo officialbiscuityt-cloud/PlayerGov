@@ -1,10 +1,10 @@
-## ===============================
-## PLAYERGOV
-## VER: 0.01
-## Paper API: 1.21
-## TESTED_VERSIONS: 1.21
-## By: BiscuitPlays
-## ===============================
+# ===============================
+# PLAYERGOV
+# VER: 0.01
+# Paper API: 26.1.2
+# TESTED_VERSIONS: 26.1.2
+# By: BiscuitPlays
+# ===============================
 
 # Enable/Disable Essentials Economy Features [FUTURE RELEASE]
 economyEnabled: true
