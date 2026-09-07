@@ -5,16 +5,16 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.github.officialbiscuityt.playerGov.Managers.ConfigManager;
 import org.github.officialbiscuityt.playerGov.Managers.NationDataManager;
-import org.github.officialbiscuityt.playerGov.commands.PlayerGovSubCommands.SubCommand;
-
-import java.util.UUID;
 
 public class NationTransferCommand implements SubCommand {
     private final NationDataManager nationDataManager;
+    private final ConfigManager configManager;
 
-    public NationTransferCommand(NationDataManager nationDataManager) {
+    public NationTransferCommand(NationDataManager nationDataManager, ConfigManager configManager) {
         this.nationDataManager = nationDataManager;
+        this.configManager = configManager;
     }
 
     // Overrides Subcommand Defaults
@@ -41,7 +41,7 @@ public class NationTransferCommand implements SubCommand {
         String transferNationName = args[1];
         String newPlayerName = args[2];
         String NDMId = nationDataManager.getid(args[1]);
-        String NDMName = nationDataManager.getName(NDMId);
+        String NDMname = nationDataManager.getName(NDMId);
 
         Boolean isOwner = false;
 
@@ -61,8 +61,7 @@ public class NationTransferCommand implements SubCommand {
 
     // Checks if nation exists
         if (!nationDataManager.exists(NDMId)) {
-            sender.sendMessage(
-                    ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.RED + " That nation does not exist!");
+            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname));
             return;
         }
 
@@ -76,6 +75,6 @@ public class NationTransferCommand implements SubCommand {
             newPlayerName,
             newPlayerUUID
     );
-        sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Nation " + ChatColor.YELLOW + NDMName + ChatColor.GREEN + " was transfered to " + ChatColor.YELLOW + newPlayerName + ChatColor.GREEN + "!");
+        sender.sendMessage(configManager.getMessage("nation-transferred", sender.getName(), NDMname));
     }
 }

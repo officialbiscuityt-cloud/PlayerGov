@@ -3,13 +3,16 @@ package org.github.officialbiscuityt.playerGov.commands.PlayerGovSubCommands;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.github.officialbiscuityt.playerGov.Managers.ConfigManager;
 import org.github.officialbiscuityt.playerGov.Managers.NationDataManager;
 
 public class NationInfoCommand implements SubCommand {
     private final NationDataManager nationDataManager;
+    private final ConfigManager configManager;
 
-    public NationInfoCommand(NationDataManager nationDataManager) {
+    public NationInfoCommand(NationDataManager nationDataManager, ConfigManager configManager) {
         this.nationDataManager = nationDataManager;
+        this.configManager = configManager;
     }
 
     // Overrides Subcommand Defaults
@@ -36,10 +39,8 @@ public class NationInfoCommand implements SubCommand {
             sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
             return;
         }
-        // Checks if nation exists
-        String NDMnationId = nationDataManager.getid(nationName);
-        String NDMnationName = nationDataManager.getName(nationName);
-        String argNationId = nationDataManager.getid(args[1]);
+        String NDMnationId = nationDataManager.getid(args[1]);
+        String NDMname = nationDataManager.getName(nationName);
 
         // Defines variables
         if (sender instanceof Player player) {
@@ -51,8 +52,7 @@ public class NationInfoCommand implements SubCommand {
                 return;
             }
             if (!nationDataManager.exists(NDMnationId)) {
-                sender.sendMessage(
-                        ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "] " + ChatColor.RED + "Nation " + ChatColor.YELLOW + nationName + ChatColor.RED + " does not exist!");
+                sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname));
                 return;
             }
 

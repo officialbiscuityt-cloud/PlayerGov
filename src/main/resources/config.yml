@@ -9,8 +9,18 @@
 # Enable/Disable Essentials Economy Features [FUTURE RELEASE]
 economyEnabled: true
 
-# Block Nation Names (Not Case Sensitive)
+# ==Blocked Names==
+# (Not Case Sensitive)
 blockedNationNames:
   - TestName1
 
-# Messages
+# ==Messages==
+# Configure M
+messages:
+  prefix: "&7[&6PLAYERGOV&7] "
+  nation-created: "&aNation &e%nation% &ahas been created!"
+  nation-disbanded: "&cNation &e%nation% &chas been disbanded!"
+  nation-transferred: "&aNation &e%nation% &a was transferred to &e%player%"
+  unknown-nation: "&e%nation% &does not exist!"
+
+  unknown-player: "&cUnknown Player"

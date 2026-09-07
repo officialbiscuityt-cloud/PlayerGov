@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.github.officialbiscuityt.playerGov.Managers.ConfigManager;
 import org.github.officialbiscuityt.playerGov.Managers.NationDataManager;
 
 import java.util.List;
@@ -13,9 +14,11 @@ import java.util.UUID;
 public class NationCreateCommand implements SubCommand {
 
     private final NationDataManager nationDataManager;
+    private final ConfigManager configManager;
 
-    public NationCreateCommand(NationDataManager nationDataManager) {
+    public NationCreateCommand(NationDataManager nationDataManager, ConfigManager configManager) {
         this.nationDataManager = nationDataManager;
+        this.configManager = configManager;
     }
 
     // Overrides Subcommand Defaults
@@ -39,10 +42,7 @@ public class NationCreateCommand implements SubCommand {
 
         String nationName = args[1];
 
-        List<String> blockedNames = Bukkit.getPluginManager()
-                .getPlugin("PlayerGov")
-                .getConfig()
-                .getStringList("blockedNationNames");
+        List<String> blockedNames = Bukkit.getPluginManager().getPlugin("PlayerGov").getConfig().getStringList("blockedNationNames");
 
         if (blockedNames.stream().anyMatch(nationName::equalsIgnoreCase)) {
             sender.sendMessage(
@@ -75,7 +75,11 @@ public class NationCreateCommand implements SubCommand {
         );
 
         sender.sendMessage(
-                ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "] " + ChatColor.GREEN + "Nation " + ChatColor.YELLOW + nationName + ChatColor.GREEN + " has been created!"
+                configManager.getMessage(
+                        "nation-created",
+                        sender.getName(),
+                        nationName
+                )
         );
     }
 }

@@ -3,13 +3,16 @@ package org.github.officialbiscuityt.playerGov.commands.PlayerGovSubCommands;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.github.officialbiscuityt.playerGov.Managers.ConfigManager;
 import org.github.officialbiscuityt.playerGov.Managers.NationDataManager;
 
 public class NationDisbandCommand implements SubCommand{
     private final NationDataManager nationDataManager;
+    private final ConfigManager configManager;
 
-    public NationDisbandCommand(NationDataManager nationDataManager) {
+    public NationDisbandCommand(NationDataManager nationDataManager, ConfigManager configManager) {
         this.nationDataManager = nationDataManager;
+        this.configManager = configManager;
     }
     // Overrides Subcommand Defaults
     @Override
@@ -37,10 +40,6 @@ public class NationDisbandCommand implements SubCommand{
             return;
         }
         String NDMID = nationDataManager.getid(nationName);
-        // Ensures nation name isn't null
-        if (nationName == null) {
-            sender.sendMessage(ChatColor.RED + "Nation name cannot be null.");
-        }
         // Defines variables
         boolean IsConsole = !(sender instanceof Player player);
         boolean IsAdmin = (sender.hasPermission("playergov.nations.*"));
@@ -56,16 +55,16 @@ public class NationDisbandCommand implements SubCommand{
         }
         // Checks if nation exists
         if (!nationDataManager.exists(NDMID)) {
-            sender.sendMessage(
-                    ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "] " + ChatColor.RED + "Nation " + ChatColor.YELLOW + nationName + ChatColor.RED + "already does not exist!"
-            );
+            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname));
+
             return;
         }
         // Disbands nation
         if (IsOwner || IsConsole || IsAdmin) {
             nationDataManager.deleteNation(NDMID);
-            sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "] " + ChatColor.RED + "Nation " + ChatColor.YELLOW + NDMname + ChatColor.RED + " has been disbanded!");
+            sender.sendMessage(configManager.getMessage("nation-disbanded", sender.getName(), NDMname));
         }
+
         }
     }
 
