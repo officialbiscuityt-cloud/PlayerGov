@@ -9,13 +9,21 @@
 # Enable/Disable Essentials Economy Features [FUTURE RELEASE]
 economyEnabled: true
 
-# ==Blocked Names==
+# ==Nation Settings==
+
 # (Not Case Sensitive)
 blockedNationNames:
   - TestName1
 
+# Disband nations if a player has been permanently banned [FUTURE RELEASE]
+disbandAfterBan: false
+
+# Limit how many nations your players can have! Set -1 for unlimited!
+nationLimit: -1
+
+
 # ==Messages==
-# Configure M
+# Configure Messages
 messages:
   prefix: "&7[&6PLAYERGOV&7] "
   nation-created: "&aNation &e%nation% &ahas been created!"
@@ -24,3 +32,4 @@ messages:
   unknown-nation: "&e%nation% &does not exist!"
 
   unknown-player: "&cUnknown Player"
+  playerExceedsAllowedNations: "&cYou have too many nations! Please use /pg disband to remove one!"

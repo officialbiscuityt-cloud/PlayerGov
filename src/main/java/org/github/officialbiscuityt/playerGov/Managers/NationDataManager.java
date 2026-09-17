@@ -85,8 +85,35 @@ public class NationDataManager {
                 }
             }
         }
+        return ownedNations;
+    }
+
+    public List<String> getOwnedNationsId(String ownerUUID) {
+        List<String> ownedNations = new ArrayList<>();
+
+        if (data.getConfigurationSection("nations") == null) {
+            return ownedNations;
+        }
+
+        for (String id : data.getConfigurationSection("nations").getKeys(false)) {
+
+            String savedOwnerUUID =
+                    data.getString("nations." + id + ".ownerUUID");
+
+            if (ownerUUID.equalsIgnoreCase(savedOwnerUUID)) {
+                ownedNations.add(id);
+            }
+        }
 
         return ownedNations;
+    }
+
+    public int getOwnedNationAmount(String ownerUUID) {
+        List<String> ownedNations = getOwnedNations(ownerUUID);
+        if (data.getConfigurationSection("nations") == null) {
+        }
+        int totalElements = ownedNations.size();
+        return ownedNations.size();
     }
 
     public String getName(String id) {

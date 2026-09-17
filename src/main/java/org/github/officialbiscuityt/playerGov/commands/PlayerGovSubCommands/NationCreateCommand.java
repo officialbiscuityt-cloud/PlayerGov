@@ -4,9 +4,11 @@ package org.github.officialbiscuityt.playerGov.commands.PlayerGovSubCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.github.officialbiscuityt.playerGov.Managers.ConfigManager;
 import org.github.officialbiscuityt.playerGov.Managers.NationDataManager;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.UUID;
@@ -64,6 +66,14 @@ public class NationCreateCommand implements SubCommand {
 // Ensures the sender is a player
         if (!(sender instanceof Player player)) {
             sender.sendMessage(ChatColor.RED + "Only players can create nations!");
+            return;
+        }
+
+// Ensures a player can only have as many nations as defined in the config
+        int NDMnationAmount = nationDataManager.getOwnedNationAmount(player.getUniqueId().toString());
+        int configNationAmount = Bukkit.getPluginManager().getPlugin("PlayerGov").getConfig().getInt("nationLimit");
+        if (!(NDMnationAmount <= configNationAmount) && !(configNationAmount == -1)) {
+            sender.sendMessage(configManager.getMessage("playerExceedsAllowedNations", sender.getName(), nationName));
             return;
         }
 // Created nation

@@ -1,10 +1,11 @@
 package org.github.officialbiscuityt.playerGov;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.github.officialbiscuityt.playerGov.Managers.ConfigManager;
 import org.github.officialbiscuityt.playerGov.Managers.NationDataManager;
-import org.github.officialbiscuityt.playerGov.Managers.ConfigManager;
 import org.github.officialbiscuityt.playerGov.commands.PlayerGovSubCommands.*;
+import org.github.officialbiscuityt.playerGov.listeners.BannedPlayersListener;
 
 public class PlayerGov extends JavaPlugin {
 
@@ -28,9 +29,11 @@ public class PlayerGov extends JavaPlugin {
         manager.register(new NationInfoCommand(nationDataManager, configManager));
         manager.register(new NationTransferCommand(nationDataManager, configManager));
 
+        // Load Listeners
+        getServer().getPluginManager().registerEvents(new BannedPlayersListener(nationDataManager,this), this);
+
         // Register commands
         getCommand("playergov").setExecutor(new PlayerGovCommand(manager));
-
         getCommand("playergov").setTabCompleter(new PlayerGovTabCompleter(nationDataManager));
     }
 

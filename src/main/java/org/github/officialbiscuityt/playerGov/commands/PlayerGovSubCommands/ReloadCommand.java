@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.github.officialbiscuityt.playerGov.PlayerGov;
 
 public class ReloadCommand implements SubCommand {
 
@@ -28,9 +27,9 @@ public class ReloadCommand implements SubCommand {
         if (sender.hasPermission("PlayerGov.reload")) {
             sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Reloading Plugin...");
             plugin.reloadConfig();
-            sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.WHITE + " Plugin Reloaded Sucessfully!");
+            sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.GREEN +  "Plugin Reloaded Sucessfully!");
             if (sender instanceof Player) {
-                plugin.getLogger().info("PlayerGOV was reloaded by: " + sender.getName());
+                plugin.getLogger().info("reloaded by: " + sender.getName());
             }
         }
     }
