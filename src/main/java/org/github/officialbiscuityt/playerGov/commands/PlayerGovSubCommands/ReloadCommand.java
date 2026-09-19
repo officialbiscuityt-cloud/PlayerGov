@@ -27,7 +27,7 @@ public class ReloadCommand implements SubCommand {
         if (sender.hasPermission("PlayerGov.reload")) {
             sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Reloading Plugin...");
             plugin.reloadConfig();
-            sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.GREEN +  "Plugin Reloaded Sucessfully!");
+            sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.GREEN +  " Plugin Reloaded Sucessfully!");
             if (sender instanceof Player) {
                 plugin.getLogger().info("reloaded by: " + sender.getName());
             }

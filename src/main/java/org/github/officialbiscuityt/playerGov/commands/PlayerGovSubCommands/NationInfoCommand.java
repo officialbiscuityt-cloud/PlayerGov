@@ -39,22 +39,34 @@ public class NationInfoCommand implements SubCommand {
             sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
             return;
         }
-        String NDMnationId = nationDataManager.getid(args[1]);
-        String NDMname = nationDataManager.getName(nationName);
 
-        // Defines variables
+        // Gets nation ID from the entered name
+        String NDMnationId = nationDataManager.getid(nationName);
+
+        // Checks if nation exists
+        if (NDMnationId == null || !nationDataManager.exists(NDMnationId)) {
+            sender.sendMessage(
+                    configManager.getMessage("unknown-nation", sender.getName(),nationName));
+            return;
+        }
+
+        // Gets nation information
+        String NDMname = nationDataManager.getName(NDMnationId);
+        String ownerName = nationDataManager.getOwner(NDMnationId);
+        String ownerUUID = nationDataManager.getOwnerUUID(NDMnationId);
+
+        // Players must be the owner unless they have info.other
         if (sender instanceof Player player) {
-           String playerUUID = player.getUniqueId().toString();
-           String ownerUUID = nationDataManager.getOwnerUUID(NDMnationId);
-           String ownerName = nationDataManager.getOwner(NDMnationId);
+
+            String playerUUID = player.getUniqueId().toString();
 
             if (!playerUUID.equals(ownerUUID) && !sender.hasPermission("playergov.info.other")) {
+
+                sender.sendMessage(
+                        configManager.getMessage("no-permission", sender.getName(), NDMname));
                 return;
             }
-            if (!nationDataManager.exists(NDMnationId)) {
-                sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname));
-                return;
-            }
+        }
 
            // Sends info if you are owner or admin
                sender.sendMessage(ChatColor.DARK_GRAY + "======= " + ChatColor.GRAY + "Nation Info for " + ChatColor.GOLD + ChatColor.BOLD + nationName + ChatColor.RESET + ChatColor.DARK_GRAY + " ======= ");
@@ -62,4 +74,3 @@ public class NationInfoCommand implements SubCommand {
                sender.sendMessage(ChatColor.GRAY + "Owner: " + ChatColor.WHITE + ownerName);
         }
     }
-}
