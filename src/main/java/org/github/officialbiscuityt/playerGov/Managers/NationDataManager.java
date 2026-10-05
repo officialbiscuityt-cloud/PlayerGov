@@ -54,6 +54,51 @@ public class NationDataManager {
         save();
     }
 
+    public void addNationType(String id, String type) {
+        data.set("nations." + id + ".type", type);
+        save();
+    }
+
+    public String getNationType(String id) {
+
+        if (data.getConfigurationSection("nations") == null) {
+            return null;
+        }
+
+        if (!data.contains("nations." + id)) {
+            return null;
+        }
+
+        return data.getString("nations." + id + ".type" );
+    }
+
+    public void delNationType(String type, String id) {
+        data.set("nations." + id + ".type", null);
+        save();
+    }
+
+    public void addNationDescription(String id, String description) {
+        data.set("nations." + id + ".description", description);
+        save();
+    }
+    public String getNationDescription(String id) {
+
+        if (data.getConfigurationSection("nations") == null) {
+            return null;
+        }
+
+        if (!data.contains("nations." + id)) {
+            return null;
+        }
+
+        return data.getString("nations." + id + ".description");
+    }
+
+    public void delNationDescription(String id) {
+        data.set("nations." + id + ".description", null);
+        save();
+    }
+
     public String getid(String name) {
         if (data.getConfigurationSection("nations") == null) {
             return null;

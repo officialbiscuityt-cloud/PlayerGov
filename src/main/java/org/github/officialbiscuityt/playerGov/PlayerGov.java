@@ -28,6 +28,7 @@ public class PlayerGov extends JavaPlugin {
         manager.register(new NationDisbandCommand(nationDataManager, configManager));
         manager.register(new NationInfoCommand(nationDataManager, configManager));
         manager.register(new NationTransferCommand(nationDataManager, configManager));
+        manager.register(new DescriptionCommand(nationDataManager, configManager));
 
         // Load Listeners
         getServer().getPluginManager().registerEvents(new BannedPlayersListener(nationDataManager,this), this);

@@ -34,6 +34,7 @@ public class PlayerGovTabCompleter implements TabCompleter {
             completions.add("disband");
             completions.add("info");
             completions.add("transfer");
+            completions.add("description");
         }
 
         // Nation names
@@ -61,6 +62,46 @@ public class PlayerGovTabCompleter implements TabCompleter {
             String input = args[2].toLowerCase();
 
             return Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(input)).toList();
+        }
+
+        // Description SubCommands
+        if (args.length == 2 && args[0].equalsIgnoreCase("description")) {
+
+            if (!(sender instanceof Player player)) {
+                return completions;
+            }
+
+            String input = args[1].toLowerCase();
+            completions.add("set");
+            completions.add("delete");
+            completions.add("view");
+
+        }
+        // Set Description
+        if ((args.length == 3)
+                && args[0].equalsIgnoreCase("description") && args[1].equalsIgnoreCase("set")) {
+
+            String input = args[2].toLowerCase();
+
+            return nationDataManager.getOwnedNations(
+                            ((Player) sender).getUniqueId().toString()
+                    ).stream()
+                    .filter(name -> name.toLowerCase().startsWith(input))
+                    .toList();
+        }
+
+
+        // Delete Description
+        if ((args.length == 3)
+                && args[0].equalsIgnoreCase("description") && args[1].equalsIgnoreCase("delete")) {
+
+            String input = args[2].toLowerCase();
+
+            return nationDataManager.getOwnedNations(
+                            ((Player) sender).getUniqueId().toString()
+                    ).stream()
+                    .filter(name -> name.toLowerCase().startsWith(input))
+                    .toList();
         }
 
         return completions;

@@ -54,6 +54,7 @@ public class NationInfoCommand implements SubCommand {
         String NDMname = nationDataManager.getName(NDMnationId);
         String ownerName = nationDataManager.getOwner(NDMnationId);
         String ownerUUID = nationDataManager.getOwnerUUID(NDMnationId);
+        String NDMDescription = nationDataManager.getNationDescription(NDMnationId);
 
         // Players must be the owner unless they have info.other
         if (sender instanceof Player player) {
@@ -69,8 +70,13 @@ public class NationInfoCommand implements SubCommand {
         }
 
            // Sends info if you are owner or admin
-               sender.sendMessage(ChatColor.DARK_GRAY + "======= " + ChatColor.GRAY + "Nation Info for " + ChatColor.GOLD + ChatColor.BOLD + nationName + ChatColor.RESET + ChatColor.DARK_GRAY + " ======= ");
-               sender.sendMessage(ChatColor.GRAY + "Name: " + ChatColor.WHITE + nationName);
-               sender.sendMessage(ChatColor.GRAY + "Owner: " + ChatColor.WHITE + ownerName);
+        String description = NDMDescription == null || NDMDescription.isEmpty()
+                ? " "
+                : NDMDescription;
+        sender.sendMessage(ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "--------" + ChatColor.RESET + ChatColor.WHITE + "  " + ChatColor.GOLD + ChatColor.BOLD + nationName + ChatColor.RESET + ChatColor.WHITE + "  " + ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "--------");
+        sender.sendMessage(ChatColor.GRAY + "Nation: " + ChatColor.WHITE + nationName);
+        sender.sendMessage(ChatColor.GRAY + "Owner: " + ChatColor.WHITE + ownerName);
+        sender.sendMessage(ChatColor.GRAY + "Description: " + ChatColor.WHITE + description);
+        sender.sendMessage(ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------");
         }
     }

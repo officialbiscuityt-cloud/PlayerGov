@@ -33,3 +33,6 @@ messages:
 
   unknown-player: "&cUnknown Player"
   playerExceedsAllowedNations: "&cYou have too many nations! Please use /pg disband to remove one!"
+
+  setDescription: "&aDescription for &e%nation% &aset!"
+  deletedDescription: "&cDescription for &e%nation% &cdeleted"

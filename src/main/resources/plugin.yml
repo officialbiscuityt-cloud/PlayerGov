@@ -42,3 +42,18 @@ permissions:
   playergov.transfer.other:
     default: op
     parent: playergov.*
+  PlayerGov.description.set:
+    default: op
+    parent: playergov.*
+  PlayerGov.description.set.other:
+    default: op
+    parent: playergov.*
+  PlayerGov.description.view:
+    default: op
+    parent: playergov.*
+  PlayerGov.description.del:
+    default: op
+    parent: playergov.*
+  PlayerGov.description.del.other:
+    default: op
+    parent: playergov.*
