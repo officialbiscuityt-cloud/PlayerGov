@@ -8,6 +8,6 @@ This plugin is licensed as a MIT meaning:
 - While not required I'd be overjoyed to be credited in whatever you use my code to create.
 
 If you are in need of help using this plugin please join our discord! 
-This is the best place to recieve support for my plugins!
+This is the best place to receive support for my plugins!
 
 Once again; Thank you for using this project hope you enjoy :)

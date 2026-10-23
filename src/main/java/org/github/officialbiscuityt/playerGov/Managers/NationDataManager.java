@@ -95,8 +95,7 @@ public class NationDataManager {
     }
 
     public void delNationDescription(String id) {
-        data.set("nations." + id + ".description", null);
-        save();
+data.set("nations." + id + ".description", null);
     }
 
     public String getid(String name) {

@@ -4,7 +4,7 @@ main: org.github.officialbiscuityt.playerGov.PlayerGov
 description: A powerful government RP/Nations Plugin :)
 author: BiscuitPlays
 website: https://github.com/officialbiscuityt-cloud/PlayerGov
-api-version: '1.21'
+api-version: '26.2'
 
 commands:
   playergov:

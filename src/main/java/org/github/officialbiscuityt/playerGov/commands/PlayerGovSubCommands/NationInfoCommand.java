@@ -39,44 +39,32 @@ public class NationInfoCommand implements SubCommand {
             sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
             return;
         }
-
         // Gets nation ID from the entered name
         String NDMnationId = nationDataManager.getid(nationName);
-
         // Checks if nation exists
         if (NDMnationId == null || !nationDataManager.exists(NDMnationId)) {
-            sender.sendMessage(
-                    configManager.getMessage("unknown-nation", sender.getName(),nationName));
+            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), nationName));
             return;
         }
-
         // Gets nation information
         String NDMname = nationDataManager.getName(NDMnationId);
         String ownerName = nationDataManager.getOwner(NDMnationId);
         String ownerUUID = nationDataManager.getOwnerUUID(NDMnationId);
         String NDMDescription = nationDataManager.getNationDescription(NDMnationId);
-
         // Players must be the owner unless they have info.other
         if (sender instanceof Player player) {
-
             String playerUUID = player.getUniqueId().toString();
-
             if (!playerUUID.equals(ownerUUID) && !sender.hasPermission("playergov.info.other")) {
-
-                sender.sendMessage(
-                        configManager.getMessage("no-permission", sender.getName(), NDMname));
+                sender.sendMessage(configManager.getMessage("no-permission", sender.getName(), NDMname));
                 return;
             }
         }
-
-           // Sends info if you are owner or admin
-        String description = NDMDescription == null || NDMDescription.isEmpty()
-                ? " "
-                : NDMDescription;
+        // Sends info if you are owner or admin
+        String description = NDMDescription == null || NDMDescription.isEmpty() ? "N/A" : NDMDescription;
         sender.sendMessage(ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "--------" + ChatColor.RESET + ChatColor.WHITE + "  " + ChatColor.GOLD + ChatColor.BOLD + nationName + ChatColor.RESET + ChatColor.WHITE + "  " + ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "--------");
         sender.sendMessage(ChatColor.GRAY + "Nation: " + ChatColor.WHITE + nationName);
         sender.sendMessage(ChatColor.GRAY + "Owner: " + ChatColor.WHITE + ownerName);
         sender.sendMessage(ChatColor.GRAY + "Description: " + ChatColor.WHITE + description);
         sender.sendMessage(ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "-------------------");
-        }
     }
+}
