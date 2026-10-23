@@ -11,6 +11,7 @@ import java.util.List;
 
 public class NationDataManager {
 
+    // File Setup and exist check
     private final File file;
     private FileConfiguration data;
 
@@ -34,7 +35,7 @@ public class NationDataManager {
 
         reload();
     }
-
+    // Create | Delete | Transfer Nation
 
     public void createNation(String name, String id, String owner, String ownerUUID) {
         data.set("nations." + id + ".name", name);
@@ -54,6 +55,7 @@ public class NationDataManager {
         save();
     }
 
+    // Add | Get | Delete Nation Type
     public void addNationType(String id, String type) {
         data.set("nations." + id + ".type", type);
         save();
@@ -77,6 +79,7 @@ public class NationDataManager {
         save();
     }
 
+    // Add | Get | Delete Nation Type
     public void addNationDescription(String id, String description) {
         data.set("nations." + id + ".description", description);
         save();
@@ -98,6 +101,7 @@ public class NationDataManager {
 data.set("nations." + id + ".description", null);
     }
 
+    // Get Automatically created nationId from nation's name
     public String getid(String name) {
         if (data.getConfigurationSection("nations") == null) {
             return null;
@@ -114,6 +118,30 @@ data.set("nations." + id + ".description", null);
         return null;
     }
 
+    // Add | Check | Remove a nation's public status
+    public Boolean addPublicNation(String id) {
+        data.set("nations." + id + ".public", true);
+        return null;
+    }
+
+    public Boolean checkIfPublicNation(String id) {
+        if (data.getConfigurationSection("nations" + id) == null) {
+            return null;
+        }
+                if (data.getBoolean("nations." + id + ".public")) {
+                    return true;
+                } else {
+                    data.set("nations." + id + ".public", false);
+                }
+                return null;
+    }
+
+    public Boolean removePublicNation(String id) {
+        data.set("nations." + id + ".public", false);
+        return null;
+    }
+
+    // Gets a player's owned nations
     public List<String> getOwnedNations(String ownerUUID) {
         List<String> ownedNations = new ArrayList<>();
 
@@ -132,6 +160,7 @@ data.set("nations." + id + ".description", null);
         return ownedNations;
     }
 
+    // Gets a player's owned nation ids
     public List<String> getOwnedNationsId(String ownerUUID) {
         List<String> ownedNations = new ArrayList<>();
 
@@ -151,7 +180,7 @@ data.set("nations." + id + ".description", null);
 
         return ownedNations;
     }
-
+    // Gets the amount of nation's a player owns
     public int getOwnedNationAmount(String ownerUUID) {
         List<String> ownedNations = getOwnedNations(ownerUUID);
         if (data.getConfigurationSection("nations") == null) {
@@ -159,23 +188,24 @@ data.set("nations." + id + ".description", null);
         int totalElements = ownedNations.size();
         return ownedNations.size();
     }
-
+    // Gets a nation's name from id
     public String getName(String id) {
         return data.getString("nations." + id + ".name");
     }
-
+    // Gets a nation's owner
     public String getOwner(String id) {
         return data.getString("nations." + id + ".owner");
     }
-
+    // Gets a nation's ownerId
     public String getOwnerUUID(String id) {
         return data.getString("nations." + id + ".ownerUUID");
     }
-
+    // Gets whether a nation exists
     public boolean exists(String id) {
         return data.contains("nations." + id);
     }
 
+    // Saves the file data
     public void save() {
         try {
             data.save(file);

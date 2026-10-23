@@ -47,11 +47,7 @@ public class NationCreateCommand implements SubCommand {
         List<String> blockedNames = Bukkit.getPluginManager().getPlugin("PlayerGov").getConfig().getStringList("blockedNationNames");
 
         if (blockedNames.stream().anyMatch(nationName::equalsIgnoreCase)) {
-            sender.sendMessage(
-                    ChatColor.GRAY + "[" +
-                            ChatColor.GOLD + "PLAYERGOV" +
-                            ChatColor.GRAY + "] " +
-                            ChatColor.RED + "That name is blocked on this server!"
+            configManager.getMessage("blocked-name", sender.getName(), nationName, ""
             );
             return;
         }
@@ -73,7 +69,7 @@ public class NationCreateCommand implements SubCommand {
         int NDMnationAmount = nationDataManager.getOwnedNationAmount(player.getUniqueId().toString());
         int configNationAmount = Bukkit.getPluginManager().getPlugin("PlayerGov").getConfig().getInt("nationLimit");
         if (!(NDMnationAmount <= configNationAmount) && !(configNationAmount == -1)) {
-            sender.sendMessage(configManager.getMessage("playerExceedsAllowedNations", sender.getName(), nationName));
+            sender.sendMessage(configManager.getMessage("playerExceedsAllowedNations", sender.getName(), nationName, ""));
             return;
         }
 // Created nation
@@ -88,7 +84,8 @@ public class NationCreateCommand implements SubCommand {
                 configManager.getMessage(
                         "nation-created",
                         sender.getName(),
-                        nationName
+                        nationName,
+                        ""
                 )
         );
     }

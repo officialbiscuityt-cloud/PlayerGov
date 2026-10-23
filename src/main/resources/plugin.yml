@@ -20,40 +20,55 @@ permissions:
     descripton: Allows reloading the PlayerGov configuration
     default: op
     parent: playergov.*
+    description: Gives perm to reload the plugin
   playergov.ncreate:
-    description: Permission for creating a nation
-    default: op
+    description: Creating a nation
+    default: true
     parent: playergov.*
   playergov.ndisband:
     default: op
     parent: playergov.*
+    description: Disband your nation
   playergov.ndisband.other:
     default: op
     parent: playergov.*
+    description: Disband another's nation
   playergov.info:
-    default: op
+    default: true
     parent: playergov.*
+    description: Info about your nation
   playergov.info.other:
     default: op
     parent: playergov.*
+    description: Info about other's nation's
   playergov.transfer:
-    default: op
+    default: true
     parent: playergov.*
+    description: Transfer your nation to another player
   playergov.transfer.other:
     default: op
     parent: playergov.*
+    description: Transfer another's nation to another player
   PlayerGov.description.set:
-    default: op
+    default: true
     parent: playergov.*
+    description: Set a description of your nation
   PlayerGov.description.set.other:
     default: op
     parent: playergov.*
+    description: Set the description of another's nation
   PlayerGov.description.view:
-    default: op
+    default: true
     parent: playergov.*
+    description: View the description of your nation
   PlayerGov.description.del:
-    default: op
+    default: true
     parent: playergov.*
+    description: Delete the description of your nation
   PlayerGov.description.del.other:
     default: op
     parent: playergov.*
+    description: Delete the description of another's nation
+  PlayerGov.exemptFromBLockedNames:
+    default: false
+    description: Exempt from blocked names

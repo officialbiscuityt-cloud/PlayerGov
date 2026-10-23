@@ -10,7 +10,7 @@
 
 # ==Nation Admin Configuration==
 
-# Enable/Disable Essentials Economy Features [FUTURE RELEASE]
+# Enable/Disable Vault Economy Features [FUTURE RELEASE]
 economyEnabled: true
 
 # (Not Case Sensitive)
@@ -26,11 +26,16 @@ nationLimit: -1
 
 # ==Messages==
 # Configure Messages
+# %player% - Command executor or the "subject"
+# %nation% - The nation
+# %target% - Target of the command
+
 messages:
-  prefix: "&7[&6PLAYERGOV&7] "
+  prefix: "&7[&6PLAYERGOV&7]"
   nation-created: "&aNation &e%nation% &ahas been created!"
   nation-disbanded: "&cNation &e%nation% &chas been disbanded!"
-  nation-transferred: "&aNation &e%nation% &a was transferred to &e%player%"
+  name-blocked: "&4the nation name %nation% is blocked on this server!"
+  nation-transferred: "&aNation &e%nation% &a was transferred from &e%player% &ato &e%target%"
   unknown-nation: "&e%nation% &cdoes not exist!"
 
   unknown-player: "&cUnknown Player"

@@ -58,7 +58,8 @@ public class DescriptionCommand implements SubCommand {
                         configManager.getMessage(
                                 "unknown-nation",
                                 sender.getName(),
-                                nationName
+                                nationName,
+                                ""
                         )
                 );
                 return;
@@ -87,7 +88,8 @@ public class DescriptionCommand implements SubCommand {
                         configManager.getMessage(
                                 "no-permission",
                                 sender.getName(),
-                                nationName
+                                nationName,
+                                ""
                         )
                 );
                 return;
@@ -105,7 +107,9 @@ public class DescriptionCommand implements SubCommand {
                     description
             );
 
-            sender.sendMessage(configManager.getMessage("setDescription", sender.getName(), nationName));
+            sender.sendMessage(configManager.getMessage("setDescription", sender.getName(),
+                    nationName,
+                    ""));
         }
 
 
@@ -128,7 +132,8 @@ public class DescriptionCommand implements SubCommand {
                         configManager.getMessage(
                                 "unknown-nation",
                                 sender.getName(),
-                                nationName
+                                nationName,
+                                ""
                         )
                 );
                 return;
@@ -157,14 +162,15 @@ public class DescriptionCommand implements SubCommand {
                         configManager.getMessage(
                                 "no-permission",
                                 sender.getName(),
-                                nationName
+                                nationName,
+                                ""
                         )
                 );
                 return;
             }
 
             nationDataManager.delNationDescription(NDMnationId);
-            sender.sendMessage(configManager.getMessage("deletedDescription", sender.getName(), nationName));
+            sender.sendMessage(configManager.getMessage("deletedDescription", sender.getName(), nationName, ""));
         }
     }
 }

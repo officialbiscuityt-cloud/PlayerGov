@@ -61,7 +61,7 @@ public class NationTransferCommand implements SubCommand {
 
     // Checks if nation exists
         if (!nationDataManager.exists(NDMId)) {
-            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname));
+            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname, ""));
             return;
         }
 
@@ -75,6 +75,6 @@ public class NationTransferCommand implements SubCommand {
             newPlayerName,
             newPlayerUUID
     );
-        sender.sendMessage(configManager.getMessage("nation-transferred", sender.getName(), NDMname));
+        sender.sendMessage(configManager.getMessage("nation-transferred", sender.getName(), NDMname, newPlayerName));
     }
 }

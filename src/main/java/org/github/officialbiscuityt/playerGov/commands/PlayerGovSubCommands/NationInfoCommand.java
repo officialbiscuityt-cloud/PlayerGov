@@ -43,7 +43,7 @@ public class NationInfoCommand implements SubCommand {
         String NDMnationId = nationDataManager.getid(nationName);
         // Checks if nation exists
         if (NDMnationId == null || !nationDataManager.exists(NDMnationId)) {
-            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), nationName));
+            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), nationName, ""));
             return;
         }
         // Gets nation information
@@ -55,7 +55,7 @@ public class NationInfoCommand implements SubCommand {
         if (sender instanceof Player player) {
             String playerUUID = player.getUniqueId().toString();
             if (!playerUUID.equals(ownerUUID) && !sender.hasPermission("playergov.info.other")) {
-                sender.sendMessage(configManager.getMessage("no-permission", sender.getName(), NDMname));
+                sender.sendMessage(configManager.getMessage("no-permission", sender.getName(), NDMname, ""));
                 return;
             }
         }

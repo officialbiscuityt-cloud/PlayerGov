@@ -11,24 +11,42 @@ public class ConfigManager {
         this.plugin = plugin;
     }
 
-    public String getMessage(String path, String player, String nation) {
+    public String getMessage(String path, String player, String nation, String targetplayer) {
 
+        // Makes the prefix defined in the config.yml a string
         String prefix = plugin.getConfig().getString(
                 "messages.prefix",
                 ""
-        );
-
+        + " ");
+        // Gets message from path
         String message = plugin.getConfig().getString(
                 "messages." + path,
                 ""
         );
-
+        // Allows color codes with "&", replaces %-% config variables
         return ChatColor.translateAlternateColorCodes(
                 '&',
                 prefix
                         + message
                         .replace("%player%", player)
                         .replace("%nation%", nation)
+                        .replace("%target%", targetplayer)
+        );
+    }
+
+    public String getMessageWithoutPrefix(String path, String player, String nation, String targetplayer) {
+        // Gets message from path
+        String message = plugin.getConfig().getString(
+                "messages." + path,
+                ""
+        );
+        // Allows color codes with "&", replaces %-% config variables
+        return ChatColor.translateAlternateColorCodes(
+                '&',
+                         message
+                        .replace("%player%", player)
+                        .replace("%nation%", nation)
+                        .replace("%target%", targetplayer)
         );
     }
 }

@@ -55,14 +55,14 @@ public class NationDisbandCommand implements SubCommand{
         }
         // Checks if nation exists
         if (!nationDataManager.exists(NDMID)) {
-            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname));
+            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname, ""));
 
             return;
         }
         // Disbands nation
         if (IsOwner || IsConsole || IsAdmin) {
             nationDataManager.deleteNation(NDMID);
-            sender.sendMessage(configManager.getMessage("nation-disbanded", sender.getName(), NDMname));
+            sender.sendMessage(configManager.getMessage("nation-disbanded", sender.getName(), NDMname, ""));
         }
 
         }
