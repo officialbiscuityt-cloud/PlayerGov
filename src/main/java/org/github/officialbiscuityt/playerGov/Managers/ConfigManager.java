@@ -16,8 +16,7 @@ public class ConfigManager {
         // Makes the prefix defined in the config.yml a string
         String prefix = plugin.getConfig().getString(
                 "messages.prefix",
-                ""
-        + " ");
+                "");
         // Gets message from path
         String message = plugin.getConfig().getString(
                 "messages." + path,
@@ -26,7 +25,7 @@ public class ConfigManager {
         // Allows color codes with "&", replaces %-% config variables
         return ChatColor.translateAlternateColorCodes(
                 '&',
-                prefix
+                prefix + " "
                         + message
                         .replace("%player%", player)
                         .replace("%nation%", nation)
@@ -48,5 +47,14 @@ public class ConfigManager {
                         .replace("%nation%", nation)
                         .replace("%target%", targetplayer)
         );
+    }
+    public String getPrefix() {
+        String message = plugin.getConfig().getString(
+                "messages.prefix",
+                ""
+        );
+        // Allows color codes with "&", replaces %-% config variables
+        return ChatColor.translateAlternateColorCodes(
+                '&', message);
     }
 }

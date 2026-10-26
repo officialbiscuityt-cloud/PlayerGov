@@ -38,43 +38,62 @@ public class NationTransferCommand implements SubCommand {
             sender.sendMessage(ChatColor.RED + "Usage: /player nation transfer <nation> <NewPlayer>");
             return;
         }
-        String transferNationName = args[1];
         String newPlayerName = args[2];
         String NDMId = nationDataManager.getid(args[1]);
+        // Checks if nation exists
+        if (!nationDataManager.exists(NDMId)) {
+            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), args[1], ""));
+            return;
+        }
+
         String NDMname = nationDataManager.getName(NDMId);
-
-        Boolean isOwner = false;
-
 
 // Works even if the target player is offline
         OfflinePlayer newPlayer = Bukkit.getOfflinePlayer(newPlayerName);
         String newPlayerUUID = newPlayer.getUniqueId().toString();
 
+        boolean isOwner = false;
+
         if (sender instanceof Player player) {
             String ownerUUID = nationDataManager.getOwnerUUID(NDMId);
-
             isOwner = player.getUniqueId().toString().equals(ownerUUID);
         }
-    if (!sender.hasPermission("playergov.transfer.other") && !isOwner) {
-        return;
-    }
 
-    // Checks if nation exists
-        if (!nationDataManager.exists(NDMId)) {
-            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname, ""));
+        if (!sender.hasPermission("playergov.transfer.other") && !isOwner) {
+            sender.sendMessage(ChatColor.RED + "You do not have permission to transfer this nation.");
             return;
         }
 
         if (!newPlayer.hasPlayedBefore()) {
-            sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]" + ChatColor.RED + " Unknown Player!");
+            sender.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "PLAYERGOV" + ChatColor.GRAY + "]"
+                    + ChatColor.RED + " Unknown Player!");
             return;
         }
 
-    nationDataManager.transferNation(
-            NDMId,
-            newPlayerName,
-            newPlayerUUID
-    );
-        sender.sendMessage(configManager.getMessage("nation-transferred", sender.getName(), NDMname, newPlayerName));
+// Check target player's nation limit
+        int targetNationAmount = nationDataManager.getOwnedNationAmount(newPlayerUUID);
+        int configNationLimit = Bukkit.getPluginManager()
+                .getPlugin("PlayerGov").getConfig().getInt("nationLimit");
+
+        int targetNationLimit = configNationLimit;
+
+        for (int i = 100; i >= 1; i--) {
+            if (newPlayer.isOnline()
+                    && ((Player) newPlayer).hasPermission("PlayerGov.nationLimit." + i)) {
+                targetNationLimit = i;
+                break;
+            }
+        }
+
+        if (targetNationLimit != -1 && targetNationAmount >= targetNationLimit) {
+            sender.sendMessage(configManager.getMessage(
+                    "targetPlayerExceedsAllowedNations", sender.getName(), NDMname, newPlayerName));
+            return;
+        }
+
+        nationDataManager.transferNation(NDMId, newPlayerName, newPlayerUUID);
+
+        sender.sendMessage(configManager.getMessage(
+                "nation-transferred", sender.getName(), NDMname, newPlayerName));
     }
 }

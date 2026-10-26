@@ -1,6 +1,5 @@
 package org.github.officialbiscuityt.playerGov.commands.PlayerGovSubCommands;
 
-// Import Classes
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -65,14 +64,25 @@ public class NationCreateCommand implements SubCommand {
             return;
         }
 
-// Ensures a player can only have as many nations as defined in the config
         int NDMnationAmount = nationDataManager.getOwnedNationAmount(player.getUniqueId().toString());
         int configNationAmount = Bukkit.getPluginManager().getPlugin("PlayerGov").getConfig().getInt("nationLimit");
-        if (!(NDMnationAmount <= configNationAmount) && !(configNationAmount == -1)) {
+
+// Ensures a player can only have as many nations as defined in the config
+        int pNationLimit = configNationAmount;
+
+        for (int i = 100; i >= 1; i--) {
+            if (player.hasPermission("PlayerGov.nationLimit." + i)) {
+                pNationLimit = i;
+                break;
+            }
+        }
+
+        if (pNationLimit != -1 && NDMnationAmount >= pNationLimit) {
             sender.sendMessage(configManager.getMessage("playerExceedsAllowedNations", sender.getName(), nationName, ""));
             return;
         }
-// Created nation
+
+// Create nation
         String nationId = UUID.randomUUID().toString();
         nationDataManager.createNation(
                 nationName, nationId,
@@ -80,13 +90,6 @@ public class NationCreateCommand implements SubCommand {
                 player.getUniqueId().toString()
         );
 
-        sender.sendMessage(
-                configManager.getMessage(
-                        "nation-created",
-                        sender.getName(),
-                        nationName,
-                        ""
-                )
-        );
+        sender.sendMessage(configManager.getMessage("nation-created", sender.getName(), nationName, ""));
     }
 }

@@ -34,12 +34,13 @@ messages:
   prefix: "&7[&6PLAYERGOV&7]"
   nation-created: "&aNation &e%nation% &ahas been created!"
   nation-disbanded: "&cNation &e%nation% &chas been disbanded!"
-  name-blocked: "&4the nation name %nation% is blocked on this server!"
-  nation-transferred: "&aNation &e%nation% &a was transferred from &e%player% &ato &e%target%"
+  name-blocked: "&4The nation name %nation% is blocked on this server!"
+  nation-transferred: "&aNation &e%nation% &awas transferred by &e%player% &ato &e%target%"
   unknown-nation: "&e%nation% &cdoes not exist!"
 
   unknown-player: "&cUnknown Player"
   playerExceedsAllowedNations: "&cYou have too many nations! Please use /pg disband to remove one!"
+  targetPlayerExceedsAllowedNations: "&e%target% &chas too many nations! Nation was not transferred!"
 
   setDescription: "&aDescription for &e%nation% &aset!"
   deletedDescription: "&cDescription for &e%nation% &cdeleted"

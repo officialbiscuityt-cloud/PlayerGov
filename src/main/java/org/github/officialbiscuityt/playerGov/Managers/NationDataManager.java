@@ -182,11 +182,7 @@ data.set("nations." + id + ".description", null);
     }
     // Gets the amount of nation's a player owns
     public int getOwnedNationAmount(String ownerUUID) {
-        List<String> ownedNations = getOwnedNations(ownerUUID);
-        if (data.getConfigurationSection("nations") == null) {
-        }
-        int totalElements = ownedNations.size();
-        return ownedNations.size();
+        return getOwnedNations(ownerUUID).size();
     }
     // Gets a nation's name from id
     public String getName(String id) {

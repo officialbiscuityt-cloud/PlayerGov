@@ -35,7 +35,7 @@ public class NationDisbandCommand implements SubCommand{
         }
         String nationName = args[1];
         // Checks disband permission
-        if (!sender.hasPermission("playergov.nations.disband")) {
+        if (!sender.hasPermission("playergov.ndisband")) {
             sender.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
             return;
         }
@@ -45,6 +45,11 @@ public class NationDisbandCommand implements SubCommand{
         boolean IsAdmin = (sender.hasPermission("playergov.nations.*"));
         boolean IsOwner = false;
 
+        // Checks if nation exists
+        if (!nationDataManager.exists(NDMID)) {
+            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), nationName, ""));
+            return;
+        }
         String NDMname = nationDataManager.getName(NDMID);
 
         // Checks if the sender is a player
@@ -53,16 +58,13 @@ public class NationDisbandCommand implements SubCommand{
             String ownerUUID = nationDataManager.getOwnerUUID(NDMID);
             IsOwner = player.getUniqueId().toString().equals(ownerUUID);
         }
-        // Checks if nation exists
-        if (!nationDataManager.exists(NDMID)) {
-            sender.sendMessage(configManager.getMessage("unknown-nation", sender.getName(), NDMname, ""));
-
-            return;
-        }
         // Disbands nation
         if (IsOwner || IsConsole || IsAdmin) {
             nationDataManager.deleteNation(NDMID);
             sender.sendMessage(configManager.getMessage("nation-disbanded", sender.getName(), NDMname, ""));
+        }
+        else {
+            sender.sendMessage(configManager.getPrefix() + ChatColor.RED + "You do not own" + " " + ChatColor.YELLOW + NDMname);
         }
 
         }

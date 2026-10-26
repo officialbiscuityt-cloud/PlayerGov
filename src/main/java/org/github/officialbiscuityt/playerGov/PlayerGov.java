@@ -24,7 +24,7 @@ public class PlayerGov extends JavaPlugin {
         ConfigManager configManager = new ConfigManager(this);
         CommandManager manager = new CommandManager();
         manager.register(new NationCreateCommand(nationDataManager, configManager));
-        manager.register(new ReloadCommand(this));
+        manager.register(new ReloadCommand(this, configManager));
         manager.register(new NationDisbandCommand(nationDataManager, configManager));
         manager.register(new NationInfoCommand(nationDataManager, configManager));
         manager.register(new NationTransferCommand(nationDataManager, configManager));

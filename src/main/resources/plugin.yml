@@ -26,7 +26,7 @@ permissions:
     default: true
     parent: playergov.*
   playergov.ndisband:
-    default: op
+    default: true
     parent: playergov.*
     description: Disband your nation
   playergov.ndisband.other:
@@ -72,3 +72,6 @@ permissions:
   PlayerGov.exemptFromBLockedNames:
     default: false
     description: Exempt from blocked names
+  PlayerGov.nationLimit.<Limit>:
+    description: Customise nation limit by permission
+    default: true
