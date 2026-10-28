@@ -7,7 +7,7 @@
 
     <groupId>org.github.officialbiscuityt</groupId>
     <artifactId>playergov</artifactId>
-    <version>0.01-SNAPSHOT</version>
+    <version>0.1-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>playergov</name>

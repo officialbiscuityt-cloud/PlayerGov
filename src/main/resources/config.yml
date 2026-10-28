@@ -38,6 +38,12 @@ messages:
   nation-transferred: "&aNation &e%nation% &awas transferred by &e%player% &ato &e%target%"
   unknown-nation: "&e%nation% &cdoes not exist!"
 
+  invite-success: "&e%target% &awas invited to &e%nation% &aby &e%player%&a!"
+  pending-invite: "&aYou were invited to join a nation! Use /pg member accept/deny!"
+  invite-accepted: "&aYou accepted an invite from &e%nation%&a!"
+  invite-denied: "&cYou denied an invite from &e%nation%&a!"
+  kick-success: "&e%target% &cwas kicked from &e%nation% &cby &e%player%&c!"
+
   unknown-player: "&cUnknown Player"
   playerExceedsAllowedNations: "&cYou have too many nations! Please use /pg disband to remove one!"
   targetPlayerExceedsAllowedNations: "&e%target% &chas too many nations! Nation was not transferred!"

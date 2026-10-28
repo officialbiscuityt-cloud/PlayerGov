@@ -35,11 +35,15 @@ public class PlayerGovTabCompleter implements TabCompleter {
             completions.add("info");
             completions.add("transfer");
             completions.add("description");
+            completions.add("member");
+            completions.add("list");
         }
 
         // Nation names
         if (args.length == 2 &&
-                (args[0].equalsIgnoreCase("disband") || args[0].equalsIgnoreCase("info") || args[0].equalsIgnoreCase("transfer"))) {
+                (args[0].equalsIgnoreCase("disband") ||
+                        args[0].equalsIgnoreCase("info") ||
+                        args[0].equalsIgnoreCase("transfer"))) {
 
             if (!(sender instanceof Player player)) {
                 return completions;
@@ -57,7 +61,7 @@ public class PlayerGovTabCompleter implements TabCompleter {
 
         // Player names for transfer
         if (args.length == 3 &&
-                args[0].equalsIgnoreCase("transfer")) {
+                (args[0].equalsIgnoreCase("transfer"))) {
 
             String input = args[2].toLowerCase();
 
@@ -74,12 +78,12 @@ public class PlayerGovTabCompleter implements TabCompleter {
             String input = args[1].toLowerCase();
             completions.add("set");
             completions.add("delete");
-            completions.add("view");
 
         }
         // Set Description
         if ((args.length == 3)
-                && args[0].equalsIgnoreCase("description") && args[1].equalsIgnoreCase("set")) {
+                && args[0].equalsIgnoreCase("description")
+                && args[1].equalsIgnoreCase("set")) {
 
             String input = args[2].toLowerCase();
 
@@ -93,7 +97,8 @@ public class PlayerGovTabCompleter implements TabCompleter {
 
         // Delete Description
         if ((args.length == 3)
-                && args[0].equalsIgnoreCase("description") && args[1].equalsIgnoreCase("delete")) {
+                && args[0].equalsIgnoreCase("description")
+                && args[1].equalsIgnoreCase("delete")) {
 
             String input = args[2].toLowerCase();
 
@@ -103,6 +108,83 @@ public class PlayerGovTabCompleter implements TabCompleter {
                     .filter(name -> name.toLowerCase().startsWith(input))
                     .toList();
         }
+
+
+// Member SubCommands
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("member")) {
+
+            if (!(sender instanceof Player player)) {
+                return completions;
+            }
+
+            String input = args[1].toLowerCase();
+            completions.add("invite");
+            completions.add("kick");
+            completions.add("list");
+            completions.add("accept");
+            completions.add("deny");
+        }
+
+        // Invite Members | Nation Names
+        if ((args.length == 3)
+                && (args[0].equalsIgnoreCase("member")
+                && (args[1].equalsIgnoreCase("invite")))) {
+
+            String input = args[2].toLowerCase();
+
+            return nationDataManager.getOwnedNations(
+                            ((Player) sender).getUniqueId().toString()
+                    ).stream()
+                    .filter(name -> name.toLowerCase().startsWith(input))
+                    .toList();
+        }
+
+        // Invite Members | Player names
+        if ((args.length == 4)
+                && (args[0].equalsIgnoreCase("member")
+                && (args[1].equalsIgnoreCase("invite")))) {
+
+            String input = args[3].toLowerCase();
+
+            return Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(input)).toList();
+        }
+
+        // Kick Members | Nation Names
+        if ((args.length == 3)
+                && (args[0].equalsIgnoreCase("member")
+                && (args[1].equalsIgnoreCase("kick")))) {
+
+            String input = args[2].toLowerCase();
+
+            return nationDataManager.getOwnedNations(((Player) sender).getUniqueId().toString()).stream().filter(name -> name.toLowerCase().startsWith(input))
+                    .toList();
+        }
+
+        // Kick Members | Player names
+        if ((args.length == 4)
+                && (args[0].equalsIgnoreCase("member")
+                && (args[1].equalsIgnoreCase("kick")))) {
+
+            String input = args[3].toLowerCase();
+
+            return Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(input)).toList();
+        }
+
+        // List Members
+        if ((args.length == 3)
+                && (args[0].equalsIgnoreCase("member")
+                && (args[1].equalsIgnoreCase("list")))) {
+
+            String input = args[2].toLowerCase();
+
+            return nationDataManager.getOwnedNations(
+                            ((Player) sender).getUniqueId().toString()
+                    ).stream()
+                    .filter(name -> name.toLowerCase().startsWith(input))
+                    .toList();
+        }
+
 
         return completions;
     }

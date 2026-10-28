@@ -1,5 +1,6 @@
 package org.github.officialbiscuityt.playerGov.Managers;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,7 +36,7 @@ public class NationDataManager {
 
         reload();
     }
-    // Create | Delete | Transfer Nation
+    // Create | Delete | Get | Transfer Nation
 
     public void createNation(String name, String id, String owner, String ownerUUID) {
         data.set("nations." + id + ".name", name);
@@ -54,6 +55,34 @@ public class NationDataManager {
         data.set("nations." + id + ".ownerUUID", newOwnerUUID);
         save();
     }
+
+    public List<String> getNationList() {
+        if (data.getConfigurationSection("nations.") == null) {
+            return new ArrayList<>();
+        }
+
+        return new ArrayList<>(data.getConfigurationSection("nations.").getKeys(false));
+    }
+
+// Add | Delete members
+    public Boolean addMember(String id, String member) {
+        List<String> members = data.getStringList("nations." + id + ".members");
+        if (members.contains(member)) return false;
+            members.add(member);
+            data.set("nations." + id + ".members", members);
+            save();
+            return true;
+    }
+
+    public void removeMember(String id, String member) {
+        List<String> members = data.getStringList("nations." + id + ".members");
+        if (members.remove(member)) {
+            data.set("nations." + id + ".members", members);
+            save();
+        }
+    }
+
+
 
     // Add | Get | Delete Nation Type
     public void addNationType(String id, String type) {
@@ -79,7 +108,7 @@ public class NationDataManager {
         save();
     }
 
-    // Add | Get | Delete Nation Type
+    // Add | Get | Delete Nation Description
     public void addNationDescription(String id, String description) {
         data.set("nations." + id + ".description", description);
         save();
@@ -118,27 +147,46 @@ data.set("nations." + id + ".description", null);
         return null;
     }
 
-    // Add | Check | Remove a nation's public status
-    public Boolean addPublicNation(String id) {
-        data.set("nations." + id + ".public", true);
-        return null;
-    }
+    // Add | Check | Remove a pending invite
 
-    public Boolean checkIfPublicNation(String id) {
-        if (data.getConfigurationSection("nations" + id) == null) {
-            return null;
+    public void addPendingInvite(String id, String playerUUID) {
+        List<String> invites = data.getStringList("nations." + id + ".invites");
+
+        if (!invites.contains(playerUUID)) {
+            invites.add(playerUUID);
+            data.set("nations." + id + ".invites", invites);
+            save();
         }
-                if (data.getBoolean("nations." + id + ".public")) {
-                    return true;
-                } else {
-                    data.set("nations." + id + ".public", false);
-                }
-                return null;
     }
 
-    public Boolean removePublicNation(String id) {
-        data.set("nations." + id + ".public", false);
-        return null;
+    public boolean hasPendingInvite(String playerUUID) {
+        for (String nationId : getNationList()) {
+            List<String> invites = data.getStringList("nations." + nationId + ".invites");
+
+            if (invites.contains(playerUUID)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public List<String> getPendingInviteInfo(String playerUUID) {
+        List<String> invitedNations = new ArrayList<>();
+
+        for (String nationId : getNationList()) {
+            List<String> invites = data.getStringList("nations." + nationId + ".invites");
+
+            if (invites.contains(playerUUID)) {
+                invitedNations.add(nationId);
+            }
+        }
+
+        return invitedNations;
+    }
+
+    public void removePendingInvite(String Id, String playerUUID) {
+        data.set("nations." + Id + ".invites" + playerUUID, null);
     }
 
     // Gets a player's owned nations
@@ -183,6 +231,10 @@ data.set("nations." + id + ".description", null);
     // Gets the amount of nation's a player owns
     public int getOwnedNationAmount(String ownerUUID) {
         return getOwnedNations(ownerUUID).size();
+    }
+    // Gets list of member's ids for a nation
+    public List<String> getMemberIds(String id) {
+        return data.getStringList("nations." + id + ".members");
     }
     // Gets a nation's name from id
     public String getName(String id) {
