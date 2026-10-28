@@ -14,7 +14,7 @@ A few things I’d like you to keep in mind:
 
 Please retain the original copyright notice and MIT License when redistributing the software, as required by the license.
 
-If you are in need of help using this plugin please join our discord! 
+If you are in need of help using this plugin please join our discord! https://discord.gg/rgJMJQphnk
 This is the best place to receive support for my plugins!
 
 Once again, Thank you for using this project hope you enjoy :)
