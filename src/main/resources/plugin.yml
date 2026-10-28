@@ -15,117 +15,118 @@ commands:
 permissions:
   playergov.*:
     description: Admin permission for PlayerGov
+    default: op
+    children:
+      playergov.reload: true
+      playergov.ncreate: true
+      playergov.ndisband: true
+      playergov.ndisband.other: true
+      playergov.info: true
+      playergov.info.other: true
+      playergov.list: true
+      playergov.transfer: true
+      playergov.transfer.other: true
+      playergov.description.set: true
+      playergov.description.set.other: true
+      playergov.description.view: true
+      playergov.description.del: true
+      playergov.description.del.other: true
+      playergov.invite: true
+      playergov.admininvite: true
+      playergov.member.list: true
+      playergov.kick: true
+      playergov.adminkick: true
+      playergov.member.accept: true
+      playergov.member.deny: true
 
   playergov.reload:
-    descripton: Allows reloading the PlayerGov configuration
+    description: Allows reloading the PlayerGov configuration
     default: op
-    parent: playergov.*
-    description: Gives perm to reload the plugin
 
   playergov.ncreate:
-    description: Creating a nation
+    description: Create a nation
     default: true
-    parent: playergov.*
 
   playergov.ndisband:
-    default: true
-    parent: playergov.*
     description: Disband your nation
+    default: true
 
   playergov.ndisband.other:
+    description: Disband another player's nation
     default: op
-    parent: playergov.*
-    description: Disband another's nation
 
   playergov.info:
+    description: View your nation's information
     default: true
-    parent: playergov.*
-    description: Info about your nation
 
   playergov.info.other:
+    description: View another nation's information
     default: op
-    parent: playergov.*
-    description: Info about other's nation's
 
-    playergov.list:
-      default: op
-      parent: playergov.*
-      description: Complete list of created nations!
+  playergov.list:
+    description: List all created nations
+    default: op
 
   playergov.transfer:
+    description: Transfer your nation's ownership
     default: true
-    parent: playergov.*
-    description: Transfer your nation to another player
 
   playergov.transfer.other:
+    description: Transfer another nation's ownership
     default: op
-    parent: playergov.*
-    description: Transfer another's nation to another player
 
   playergov.description.set:
+    description: Set your nation's description
     default: true
-    parent: playergov.*
-    description: Set a description of your nation
 
   playergov.description.set.other:
+    description: Set another nation's description
     default: op
-    parent: playergov.*
-    description: Set the description of another's nation
 
   playergov.description.view:
+    description: View a nation's description
     default: true
-    parent: playergov.*
-    description: View the description of your nation
 
   playergov.description.del:
+    description: Delete your nation's description
     default: true
-    parent: playergov.*
-    description: Delete the description of your nation
 
   playergov.description.del.other:
+    description: Delete another nation's description
     default: op
-    parent: playergov.*
-    description: Delete the description of another's nation
 
   playergov.invite:
-    default: true
-    parent: playergov.*
     description: Invite a player to your nation
+    default: true
 
   playergov.admininvite:
+    description: Invite a player to another nation's nation
     default: op
-    parent: playergov.*
-    description: Invite a player to another's nation
 
-    playergov.member.list:
-      default: op
-      parent: playergov.*
-      description: List members of a nation
+  playergov.member.list:
+    description: List members of a nation
+    default: op
 
   playergov.kick:
-    default: true
-    parent: playergov.*
     description: Kick a player from your nation
+    default: true
 
   playergov.adminkick:
-    default: op
-    parent: playergov.*
     description: Kick a player from another's nation
+    default: op
 
-    playergov.member.accept:
-      default: true
-      parent: playergov.*
-      description: Accept an invite you have received
+  playergov.member.accept:
+    description: Accept pending nation invitations
+    default: true
 
-      playergov.member.deny:
-        default: true
-        parent: playergov.*
-        description: Deny an invite you have received
+  playergov.member.deny:
+    description: Deny pending nation invitations
+    default: true
 
   playergov.exemptFromBLockedNames:
+    description: Exempt from blocked nation names
     default: false
-    description: Exempt from blocked names
 
   playergov.nationLimit.<Limit>:
-    description: Customise nation limit by permission
+    description: Customize the nation limit by permission
     default: true
