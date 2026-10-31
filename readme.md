@@ -18,5 +18,3 @@ If you are in need of help using this plugin please join our discord! https://di
 This is the best place to receive support for my plugins!
 
 Once again, Thank you for using this project hope you enjoy :)
-
-Test Webhook
